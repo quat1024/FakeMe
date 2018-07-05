@@ -35,12 +35,13 @@ public class BlockClicker extends Block {
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
 		boolean isPowered = state.getValue(POWERED);
 		boolean shouldPower = world.isBlockPowered(pos);
+		int strength = world.isBlockIndirectlyGettingPowered(pos);
 		
 		if(shouldPower && !isPowered) {
 			world.setBlockState(pos, state.withProperty(POWERED, true));
 			TileEntity tile = world.getTileEntity(pos);
 			if(tile instanceof TileClicker) {
-				((TileClicker)tile).doClick();
+				((TileClicker)tile).doClick(strength <= 5);
 			}
 		} else if(isPowered && !shouldPower) {
 			world.setBlockState(pos, state.withProperty(POWERED, false));
