@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import quaternary.fakeme.block.ModBlocks;
 import quaternary.fakeme.item.ModItems;
+import quaternary.fakeme.net.NetHandler;
 import quaternary.fakeme.tile.ModTiles;
 import quaternary.fakeme.ui.GuiHandler;
 
@@ -44,6 +45,8 @@ public class FakeMe {
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent e) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
+		
+		NetHandler.init();
 	}
 	
 	@Mod.EventBusSubscriber

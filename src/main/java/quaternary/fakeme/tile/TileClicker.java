@@ -228,6 +228,15 @@ public class TileClicker extends TileEntity {
 		fake.inventory.clear();
 	}
 	
+	public boolean isLeftClick() {
+		return leftClick;
+	}
+	
+	public void setLeftClick(boolean leftClick) {
+		this.leftClick = leftClick;
+		markDirty();
+	}
+	
 	private EnumFacing getFacing() {
 		return world.getBlockState(pos).getValue(BlockClicker.FACING);
 	}
