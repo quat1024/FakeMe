@@ -6,7 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import quaternary.fakeme.block.ModBlocks;
 import quaternary.fakeme.item.ModItems;
 import quaternary.fakeme.tile.ModTiles;
+import quaternary.fakeme.ui.GuiHandler;
 
 @Mod(modid = FakeMe.MODID, name = FakeMe.NAME, version = FakeMe.VERSION)
 public class FakeMe {
@@ -34,6 +37,14 @@ public class FakeMe {
 			return ICON_STACK;
 		}
 	};
+	
+	@Mod.Instance(MODID)
+	public static FakeMe INSTANCE = null;
+	
+	@Mod.EventHandler
+	public static void init(FMLInitializationEvent e) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
+	}
 	
 	@Mod.EventBusSubscriber
 	public static class Events {

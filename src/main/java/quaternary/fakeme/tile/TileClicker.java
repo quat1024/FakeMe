@@ -36,14 +36,6 @@ import java.util.function.Function;
 import static net.minecraft.block.Block.NULL_AABB;
 
 public class TileClicker extends TileEntity {
-	public TileClicker() {
-		leftClick = false;
-	}
-	
-	public TileClicker(boolean leftClick) {
-		this.leftClick = leftClick;
-	}
-	
 	@CapabilityInject(IItemHandler.class)
 	public static final Capability<IItemHandler> ITEM_HANDLER_CAP = null;
 	

@@ -9,19 +9,21 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import quaternary.fakeme.FakeMe;
 import quaternary.fakeme.tile.TileClicker;
+import quaternary.fakeme.ui.GuiHandler;
 
 import javax.annotation.Nullable;
 
 public class BlockClicker extends Block {
-	public BlockClicker(boolean leftClick) {
+	public BlockClicker() {
 		super(Material.ROCK, MapColor.GRAY);
-		
-		this.leftClick = leftClick;
 		
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(POWERED, false));
 	}
@@ -29,7 +31,14 @@ public class BlockClicker extends Block {
 	public static final PropertyEnum<EnumFacing> FACING = BlockDirectional.FACING;
 	public static final PropertyBool POWERED = PropertyBool.create("powered");
 	
-	private final boolean leftClick;
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if(!world.isRemote && !player.isSneaking()) {
+			player.openGui(FakeMe.INSTANCE, GuiHandler.CLICKER_UI, world, pos.getX(), pos.getY(), pos.getZ());
+		}
+		
+		return true;
+	}
 	
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
@@ -78,6 +87,6 @@ public class BlockClicker extends Block {
 	@Nullable
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileClicker(leftClick);
+		return new TileClicker();
 	}
 }

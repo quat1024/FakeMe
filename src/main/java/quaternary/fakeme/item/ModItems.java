@@ -8,8 +8,7 @@ import quaternary.fakeme.block.ModBlocks;
 
 public class ModItems {
 	public static void initItems(IForgeRegistry<Item> reg) {
-		reg.register(createItem(new ItemBlock(ModBlocks.LEFT_CLICKER)));
-		reg.register(createItem(new ItemBlock(ModBlocks.RIGHT_CLICKER)));
+		reg.register(createItem(new ItemBlock(ModBlocks.CLICKER)));
 	}
 	
 	private static <IB extends ItemBlock> IB createItem(IB itemBlock) {

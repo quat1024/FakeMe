@@ -9,19 +9,14 @@ import quaternary.fakeme.FakeMe;
 
 public class ModBlocks {
 	public static final class Names {
-		public static final String LEFT_CLICKER = "left_clicker";
-		public static final String RIGHT_CLICKER = "right_clicker";
+		public static final String CLICKER = "clicker";
 	}
 	
-	@GameRegistry.ObjectHolder(FakeMe.MODID + ":" + Names.LEFT_CLICKER)
-	public static final Block LEFT_CLICKER = Blocks.AIR;
-	
-	@GameRegistry.ObjectHolder(FakeMe.MODID + ":" + Names.RIGHT_CLICKER)
-	public static final Block RIGHT_CLICKER = Blocks.AIR;
+	@GameRegistry.ObjectHolder(FakeMe.MODID + ":" + Names.CLICKER)
+	public static final Block CLICKER = Blocks.AIR;
 	
 	public static void initBlocks(IForgeRegistry<Block> reg) {
-		reg.register(createBlock(new BlockClicker(true), Names.LEFT_CLICKER));
-		reg.register(createBlock(new BlockClicker(false), Names.RIGHT_CLICKER));
+		reg.register(createBlock(new BlockClicker(), Names.CLICKER));
 	}
 	
 	private static <B extends Block> B createBlock(B b, String name) {
